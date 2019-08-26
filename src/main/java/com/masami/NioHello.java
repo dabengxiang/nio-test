@@ -3,10 +3,8 @@ package com.masami;
 
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
@@ -148,17 +146,16 @@ public class NioHello {
         final int start = 0;
          final int size = 1024;
 
-        RandomAccessFile raf = new RandomAccessFile( "/test.txt", "rw" );
+        RandomAccessFile raf = new RandomAccessFile( "E://test.txt", "rw" );
         FileChannel fc = raf.getChannel();
         //把缓冲区跟文件系统进行一个映射关联
         //只要操作缓冲区里面的内容，文件内容也会跟着改变
         MappedByteBuffer mbb = fc.map( FileChannel.MapMode.READ_WRITE,start, size );
-        System.out.println(mbb.get(0));
-//        mbb.put( 0, (byte)97 );
+//        System.out.println(mbb.get(0));
+        mbb.put( 0, (byte)97 );
         mbb.put( 1023, (byte)122 );
         raf.close();
     }
-
 
 
 
